@@ -12,6 +12,13 @@ const eleGrid = document.querySelector('.grid');
 const btnPlay = document.querySelector('#play');
 const selectLevel = document.querySelector('#level');
 const eleRequest = document.querySelector('.request')
+let points = 0
+
+    ArrMines = []
+
+    let eleRandomNumber = Math.floor(Math.random() * 100) + 1;
+
+
 
 btnPlay.addEventListener('click',function(){
     eleRequest.classList.add('hidden');
@@ -20,6 +27,8 @@ btnPlay.addEventListener('click',function(){
     const cell = parseInt(selectLevel.value)
 
     createGrid(cell,eleGrid)
+
+   
 });
 
 function createGrid(cell,eleContainer){
@@ -32,9 +41,16 @@ eleContainer.innerHTML = '';
         eleCell.classList.add('cell');
         eleContainer.append(eleCell);
 
+       
+
+
         eleCell.addEventListener('click',function(){
             eleCell.classList.toggle('clicked');
+               if(ArrMines.includes(eleRandomNumber) ){
+                console.log('ritenta!hai perso')
+               }
         });
     }
     console.log('hai cliccato la casella', cell)
 }
+
