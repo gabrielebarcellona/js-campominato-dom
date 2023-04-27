@@ -14,43 +14,45 @@ const selectLevel = document.querySelector('#level');
 const eleRequest = document.querySelector('.request')
 let points = 0
 
-    ArrMines = []
+let ArrMines;
 
-    let eleRandomNumber = Math.floor(Math.random() * 100) + 1;
-
-
-
-btnPlay.addEventListener('click',function(){
+btnPlay.addEventListener('click', function () {
     eleRequest.classList.add('hidden');
     eleGrid.classList.add('active');
 
-    const cell = parseInt(selectLevel.value)
+    let cell = parseInt(selectLevel.value)
 
-    createGrid(cell,eleGrid)
+    createGrid(cell, eleGrid)
 
-   
+    ArrMines = [];
+    for (let i = 0; i < 16; i++) {
+        let eleRandomNumber = Math.floor(Math.random() * 100) + 1;
+        ArrMines.includes(eleRandomNumber)
+        ArrMines.push(eleRandomNumber)
+    }
 });
 
-function createGrid(cell,eleContainer){
-   
-eleContainer.innerHTML = '';
+function createGrid(cell, eleContainer) {
 
-    for (let i = 1 ; i <= cell; i++){
+    eleContainer.innerHTML = '';
+
+    for (let i = 1; i <= cell; i++) {
         const eleCell = document.createElement('div');
         eleCell.innerHTML = i;
         eleCell.classList.add('cell');
         eleContainer.append(eleCell);
 
-       
 
 
-        eleCell.addEventListener('click',function(){
-            eleCell.classList.toggle('clicked');
-               if(ArrMines.includes(eleRandomNumber) ){
+
+        eleCell.addEventListener('click', function () {
+            eleCell.classList.add('clicked');
+            if (ArrMines.includes(i)) {
                 console.log('ritenta!hai perso')
-               }
+                eleCell.classList.add('mines')
+
+            }
         });
     }
-    console.log('hai cliccato la casella', cell)
 }
 
